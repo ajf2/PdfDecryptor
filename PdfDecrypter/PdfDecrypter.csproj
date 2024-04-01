@@ -8,12 +8,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="PdfDecrypters\AsposePdfDecrypter.cs" />
-    <Compile Remove="PdfDecrypters\FreeSpirePdfDecrypter.cs" />
-    <Compile Remove="PdfDecrypters\IronPdfDecrypter.cs" />
-    <Compile Remove="PdfDecrypters\PdfClownDecrypter.cs" />
-    <Compile Remove="PdfDecrypters\PdfPigDecrypter.cs" />
-    <Compile Remove="PdfDecrypters\PdfSharpDecrypter.cs" />
+    <Compile Remove="PdfDecryptors\AsposePdfDecryptor.cs" />
+    <Compile Remove="PdfDecryptors\FreeSpirePdfDecryptor.cs" />
+    <Compile Remove="PdfDecryptors\IronPdfDecryptor.cs" />
+    <Compile Remove="PdfDecryptors\PdfClownDecryptor.cs" />
+    <Compile Remove="PdfDecryptors\PdfPigDecryptor.cs" />
+    <Compile Remove="PdfDecryptors\PdfSharpDecryptor.cs" />
   </ItemGroup>
 
   <ItemGroup>
