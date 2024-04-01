@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "PdfDecryptor": {
+      "commandName": "Project",
+      "commandLineArgs": "\"Sample Encrypted PDF (Password is hello!).pdf\""
+    }
+  }
+}
