@@ -4,8 +4,8 @@ var argsAreValid = ReadInputFilePath(args);
 if (!argsAreValid)
   PrintUsage();
 else {
-  var parameters = new PdfDecrypter.Parameters(inputFilePath);
-  var fileIsEncrypted = await PdfDecrypter.PdfDecrypter.CheckIsEncryptedAsync(parameters);
+  var parameters = new PdfDecryptor.Parameters(inputFilePath);
+  var fileIsEncrypted = await PdfDecryptor.PdfDecryptor.CheckIsEncryptedAsync(parameters);
   if (fileIsEncrypted) {
     Console.Write("File is encrypted, enter password:");
     ConsoleKeyInfo keyInfo = Console.ReadKey(true);
@@ -14,7 +14,7 @@ else {
       keyInfo = Console.ReadKey(true);
     }
 
-    await PdfDecrypter.PdfDecrypter.DecryptAsync(parameters);
+    await PdfDecryptor.PdfDecryptor.DecryptAsync(parameters);
   }
 }
 
@@ -27,4 +27,4 @@ bool ReadInputFilePath(string[] args) {
   return true;
 }
 
-void PrintUsage() => Console.WriteLine($"Usage:{Environment.NewLine}PdfDecrypter <path-to-encrypted-pdf>");
+void PrintUsage() => Console.WriteLine($"Usage:{Environment.NewLine}PdfDecryptor <path-to-encrypted-pdf>");

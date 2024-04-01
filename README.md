@@ -1,11 +1,11 @@
-# PdfDecrypter
+# PdfDecryptor
 
-Simple command line app for decrypting password-protected PDF files, if you know the password. Built using iText7, which does all the hard work better than the other packages I tried (included in the source).
+Simple command line app for decrypting password-protected PDF files, if you know the password. Built using iText, which does all the hard work better than the other packages I tried.
 
 Usage:
 
 ```
-PdfDecrypter.exe <path-to-pdf-file>
+PdfDecryptor.exe <path-to-pdf-file>
 ```
 
 Enter the correct password and it'll produce a `.dec.pdf` file in the same location as the input.

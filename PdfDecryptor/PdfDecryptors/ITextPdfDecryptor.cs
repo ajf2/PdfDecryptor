@@ -2,8 +2,8 @@
 using iText.Kernel.Pdf;
 using System.Text;
 
-namespace PdfDecrypter.PdfDecrypters {
-  public class ITextPdfDecrypter : IPdfDecrypter {
+namespace PdfDecryptor.PdfDecryptors {
+  public class ITextPdfDecryptor : IPdfDecryptor {
     public Task<bool> CheckIsEncryptedAsync(Parameters parameters) => Task.Run(() => {
       try {
         var pdfFile = new PdfDocument(new PdfReader(parameters.InputFilePath));

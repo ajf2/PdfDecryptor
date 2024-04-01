@@ -1,10 +1,10 @@
-﻿using PdfDecrypter.PdfDecrypters;
+﻿using PdfDecryptor.PdfDecryptors;
 
-namespace PdfDecrypter {
-  public static class PdfDecrypter {
+namespace PdfDecryptor {
+  public static class PdfDecryptor {
     public static async Task<bool> CheckIsEncryptedAsync(Parameters parameters) {
       try {
-        return await new ITextPdfDecrypter().CheckIsEncryptedAsync(parameters);
+        return await new ITextPdfDecryptor().CheckIsEncryptedAsync(parameters);
       } catch (Exception ex) {
         Console.WriteLine(ex.Message);
         return false;
@@ -13,7 +13,7 @@ namespace PdfDecrypter {
 
     public static async Task DecryptAsync(Parameters parameters) {
       try {
-        await new ITextPdfDecrypter().DecryptAsync(parameters);
+        await new ITextPdfDecryptor().DecryptAsync(parameters);
       } catch (Exception ex) {
         Console.WriteLine(ex.Message);
       }
