@@ -12,8 +12,13 @@ namespace PdfDecryptor {
     }
 
     public static async Task DecryptAsync(Parameters parameters) {
-      try {
+      try
+      {
         await new ITextPdfDecryptor().DecryptAsync(parameters);
+      }
+      catch (IncorrectPasswordException)
+      {
+        Console.WriteLine($"{Environment.NewLine}Incorrect password.");
       } catch (Exception ex) {
         Console.WriteLine(ex.Message);
       }
@@ -50,4 +55,6 @@ namespace PdfDecryptor {
       //OutputFilePath = string.IsNullOrEmpty(outputFilePath) ? inputFilePath.Replace(".pdf", ".dec.pdf") : outputFilePath;
     }
   }
+
+  public class IncorrectPasswordException() : ApplicationException("Incorrect password");
 }
