@@ -11,18 +11,8 @@ namespace PdfDecryptor {
       }
     }
 
-    public static async Task DecryptAsync(Parameters parameters) {
-      try
-      {
-        await new ITextPdfDecryptor().DecryptAsync(parameters);
-      }
-      catch (IncorrectPasswordException)
-      {
-        Console.WriteLine($"{Environment.NewLine}Incorrect password.");
-      } catch (Exception ex) {
-        Console.WriteLine(ex.Message);
-      }
-    }
+    public static async Task<bool> DecryptAsync(Parameters parameters) =>
+      await new ITextPdfDecryptor().DecryptAsync(parameters);
   }
 
   public class Parameters {

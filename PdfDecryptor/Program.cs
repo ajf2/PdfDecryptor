@@ -6,15 +6,33 @@ if (!argsAreValid)
 else {
   var parameters = new PdfDecryptor.Parameters(inputFilePath);
   var fileIsEncrypted = await PdfDecryptor.PdfDecryptor.CheckIsEncryptedAsync(parameters);
-  if (fileIsEncrypted) {
+  if (fileIsEncrypted)
+  {
     Console.Write("File is encrypted, enter password:");
-    ConsoleKeyInfo keyInfo = Console.ReadKey(true);
-    while (keyInfo.Key != ConsoleKey.Enter) {
+    var keyInfo = Console.ReadKey(true);
+    while (keyInfo.Key != ConsoleKey.Enter)
+    {
       parameters.Password += keyInfo.KeyChar;
       keyInfo = Console.ReadKey(true);
     }
 
-    await PdfDecryptor.PdfDecryptor.DecryptAsync(parameters);
+    var hasBeenDecrypted = await PdfDecryptor.PdfDecryptor.DecryptAsync(parameters);
+    while (!hasBeenDecrypted)
+    {
+      Console.Write($"{Environment.NewLine}Incorrect password, try again: ");
+      parameters.Password = "";
+      keyInfo = Console.ReadKey(true);
+      while (keyInfo.Key != ConsoleKey.Enter)
+      {
+        parameters.Password += keyInfo.KeyChar;
+        keyInfo = Console.ReadKey(true);
+      }
+      hasBeenDecrypted = await PdfDecryptor.PdfDecryptor.DecryptAsync(parameters);
+    }
+  }
+  else
+  {
+    Console.WriteLine("File is not encrypted.");
   }
 }
 

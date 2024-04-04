@@ -13,22 +13,29 @@ namespace PdfDecryptor.PdfDecryptors {
       return false;
     });
 
-    public Task DecryptAsync(Parameters parameters)
+    public Task<bool> DecryptAsync(Parameters parameters)
     {
+      PdfReader? pdfReader = null;
+      PdfWriter? pdfWriter = null;
+      PdfDocument? pdfDocument = null;
       try
       {
         var readerProperties = new ReaderProperties().SetPassword(Encoding.UTF8.GetBytes(parameters.Password));
-        var pdfReader = new PdfReader(parameters.InputFilePath, readerProperties);
-        var pdfFile = new PdfDocument(
-          pdfReader,
-          new PdfWriter(parameters.OutputFilePath)
-        );
-        pdfFile.Close();
-        return Task.CompletedTask;
+        pdfReader = new PdfReader(parameters.InputFilePath, readerProperties);
+        pdfWriter = new PdfWriter(parameters.OutputFilePath);
+        pdfDocument = new PdfDocument(pdfReader, pdfWriter);
+
+        return Task.FromResult(true);
       }
       catch (BadPasswordException)
       {
-        throw new IncorrectPasswordException();
+        return Task.FromResult(false);
+      }
+      finally
+      {
+        pdfDocument?.Close();
+        pdfReader?.Close();
+        pdfWriter?.Close();
       }
     }
   }
