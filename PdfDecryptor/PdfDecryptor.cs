@@ -13,6 +13,25 @@ namespace PdfDecryptor {
 
     public static async Task<bool> DecryptAsync(Parameters parameters) =>
       await new ITextPdfDecryptor().DecryptAsync(parameters);
+
+    public static async Task BruteForcePassword(Parameters parameters, BruteForcePasswordIterator passwords) {
+      var startTime = DateTimeOffset.Now;
+      Console.WriteLine($"Started brute force cracking at {startTime}");
+      var readStream = File.OpenRead(parameters.InputFilePath);
+      var decryptor = new ITextPdfDecryptor();
+      foreach (string password in passwords) {
+        parameters.Password = password;
+        if (decryptor.PasswordIsCorrect(readStream, password))
+          break;
+      }
+      readStream.Close();
+      var endTime = DateTimeOffset.Now;
+      var passwordsPerSecond = passwords.PasswordAttempts / (endTime - startTime).TotalSeconds;
+      Console.WriteLine($"Password was: {parameters.Password}");
+      Console.WriteLine($"Finished brute force cracking at {endTime}");
+      Console.WriteLine($"Performed {passwordsPerSecond} password attempts per second.");
+      await decryptor.DecryptAsync(parameters);
+    }
   }
 
   public class Parameters {

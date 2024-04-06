@@ -38,5 +38,19 @@ namespace PdfDecryptor.PdfDecryptors {
         pdfWriter?.Close();
       }
     }
+
+    public bool PasswordIsCorrect(FileStream readStream, string password) {
+      try {
+        var pdfFile = new PdfDocument(
+            new PdfReader(readStream, new ReaderProperties().SetPassword(Encoding.UTF8.GetBytes(password)))
+        );
+        pdfFile.Close();
+        return true;
+      } catch (BadPasswordException) {
+        return false;
+      } finally {
+        readStream.Position = 0;
+      }
+    }
   }
 }
