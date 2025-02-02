@@ -5,13 +5,12 @@ Simple command line app for decrypting password-protected PDF files, if you know
 Usage:
 
 ```
-PdfDecryptor.exe <path-to-pdf-file>
+PdfDecryptor.exe <paths-to-pdf-files>
 ```
 
-Enter the correct password and it'll produce a `.dec.pdf` file in the same location as the input.
+Enter the correct password and it'll produce a `.dec.pdf` file for each input file, in the same location.
 
-TODO:
-- Enter an incorrect password and it'll throw an exception. It should display a message and take input for a new password attempt.
+TODO?:
 - Pressing backspace adds `\b` to the password string instead of removing the most recently added character.
 - There may be problems with other keys e.g. Home/End/Cursors.
 - It won't work if your PDF file's name doesn't end in `.pdf`.
